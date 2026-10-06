@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { PasswordConfirmModal } from "./password-confirm-modal";
 import { TwoFactorSetup } from "./two-factor-setup";
+import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 type TwoFactorSettingsProps = {
   isEnabled?: boolean;
@@ -34,6 +36,8 @@ const MOCK_SETUP_DATA: SetupData = {
 export function TwoFactorSettings({
   isEnabled = false,
 }: TwoFactorSettingsProps) {
+  const router = useRouter();
+
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [modalAction, setModalAction] = useState<"enable" | "disable">(
     "enable",
@@ -49,25 +53,67 @@ export function TwoFactorSettings({
     setShowPasswordModal(false);
   }
 
-  function handlePasswordConfirmed(_password: string) {
+  async function handlePasswordConfirmed(_password: string) {
     setShowPasswordModal(false);
 
     if (modalAction === "enable") {
-      // TODO: llamar al servidor con la contraseña y usar su respuesta
-      setSetupData(MOCK_SETUP_DATA);
+      const { data, error } = await authClient.twoFactor.enable({
+        password: _password,
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      setSetupData({
+        totpUri: data.totpURI,
+        secretKey: data.totpURI,
+        backupCodes: data.backupCodes,
+      });
+
+      console.log({ data, error });
       return;
     }
 
     // TODO: desactivar 2FA
+    const { data, error } = await authClient.twoFactor.disable({
+      password: _password,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    console.log({ data, error });
+    alert("2FA desactivado correctamente");
+    setSetupData(null);
+    router.refresh();
   }
 
   function handleCancelSetup() {
     setSetupData(null);
   }
 
-  function handleCompleteSetup() {
+  async function handleCompleteSetup(verificationCode: string) {
     // TODO: confirmar activación en el servidor
+    // setSetupData(null);
+
+    const { data, error } = await authClient.twoFactor.verifyTotp({
+      code: verificationCode,
+      trustDevice: false,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    console.log({ data, error });
+    alert("2FA activado correctamente");
     setSetupData(null);
+    router.refresh();
   }
 
   const modalCopy =

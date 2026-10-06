@@ -8,7 +8,7 @@ type TwoFactorSetupProps = {
   totpUri: string;
   secretKey: string;
   backupCodes: string[];
-  onComplete: () => void;
+  onComplete: (code: string) => void;
   onCancel: () => void;
 };
 
@@ -170,7 +170,7 @@ export function TwoFactorSetup({
         </button>
         <button
           type="button"
-          onClick={onComplete}
+          onClick={() => onComplete(verificationCode)}
           disabled={!canComplete}
           className="h-11 rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
         >

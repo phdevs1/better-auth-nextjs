@@ -5,8 +5,11 @@ import { AuthDivider } from "../components/auth-divider";
 import { AuthField } from "../components/auth-field";
 import { SocialSignInButtons } from "../components/social-sign-in-buttons";
 import { authClient } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
+  const router = useRouter();
+
   async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -29,6 +32,11 @@ export function LoginForm() {
         onSuccess: (ctx) => {
           //redirect to the dashboard or sign in page
           console.log("Success...");
+          console.log("ANTES:", window.location.pathname);
+
+          router.push("/dashboard");
+
+          console.log("DESPUÉS:", window.location.pathname);
         },
         onError: async (ctx) => {
           if (ctx.error.status === 403) {
