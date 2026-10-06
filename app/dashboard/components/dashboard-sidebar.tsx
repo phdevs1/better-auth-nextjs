@@ -1,7 +1,8 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const navItems = [
   { href: "/dashboard", label: "Resumen" },
@@ -13,6 +14,24 @@ const navItems = [
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onRequest: () => {
+          console.log("Cerrando sesión...");
+        },
+        onSuccess: () => {
+          router.push("/auth/login");
+          router.refresh();
+        },
+        onError: (error) => {
+          console.error(error);
+        },
+      },
+    });
+  };
 
   return (
     <aside className="flex w-56 shrink-0 flex-col border-r border-zinc-200 bg-white px-4 py-6 dark:border-zinc-800 dark:bg-zinc-950">
@@ -59,6 +78,7 @@ export function DashboardSidebar() {
         <button
           type="button"
           className="mt-2 block w-full rounded-lg px-3 py-2 text-left text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-50 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+          onClick={handleSignOut}
         >
           Sign Out
         </button>
