@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { PasswordConfirmModal } from './password-confirm-modal';
-import { TwoFactorSetup } from './two-factor-setup';
+import { useState } from "react";
+import { PasswordConfirmModal } from "./password-confirm-modal";
+import { TwoFactorSetup } from "./two-factor-setup";
 
 type TwoFactorSettingsProps = {
   isEnabled?: boolean;
@@ -17,26 +17,30 @@ type SetupData = {
 // Datos de ejemplo para el diseño. Se reemplazarán por la respuesta del servidor.
 const MOCK_SETUP_DATA: SetupData = {
   totpUri:
-    'otpauth://totp/DemoApp:usuario@ejemplo.com?secret=JBSWY3DPEHPK3PXP&issuer=DemoApp',
-  secretKey: 'JBSWY3DPEHPK3PXP',
+    "otpauth://totp/DemoApp:usuario@ejemplo.com?secret=JBSWY3DPEHPK3PXP&issuer=DemoApp",
+  secretKey: "JBSWY3DPEHPK3PXP",
   backupCodes: [
-    '8f3a-2b1c',
-    'd4e5-6f7a',
-    '1c2d-3e4f',
-    '9a8b-7c6d',
-    '5e4f-3a2b',
-    '7c8d-9e0f',
-    '2b3c-4d5e',
-    '6f7a-8b9c',
+    "8f3a-2b1c",
+    "d4e5-6f7a",
+    "1c2d-3e4f",
+    "9a8b-7c6d",
+    "5e4f-3a2b",
+    "7c8d-9e0f",
+    "2b3c-4d5e",
+    "6f7a-8b9c",
   ],
 };
 
-export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps) {
+export function TwoFactorSettings({
+  isEnabled = false,
+}: TwoFactorSettingsProps) {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [modalAction, setModalAction] = useState<'enable' | 'disable'>('enable');
+  const [modalAction, setModalAction] = useState<"enable" | "disable">(
+    "enable",
+  );
   const [setupData, setSetupData] = useState<SetupData | null>(null);
 
-  function handleOpenPasswordModal(action: 'enable' | 'disable') {
+  function handleOpenPasswordModal(action: "enable" | "disable") {
     setModalAction(action);
     setShowPasswordModal(true);
   }
@@ -48,7 +52,7 @@ export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps)
   function handlePasswordConfirmed(_password: string) {
     setShowPasswordModal(false);
 
-    if (modalAction === 'enable') {
+    if (modalAction === "enable") {
       // TODO: llamar al servidor con la contraseña y usar su respuesta
       setSetupData(MOCK_SETUP_DATA);
       return;
@@ -67,18 +71,18 @@ export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps)
   }
 
   const modalCopy =
-    modalAction === 'enable'
+    modalAction === "enable"
       ? {
-          title: 'Confirma tu contraseña',
+          title: "Confirma tu contraseña",
           description:
-            'Antes de activar la autenticación en dos pasos, necesitamos verificar que eres tú.',
-          confirmLabel: 'Activar 2FA',
+            "Antes de activar la autenticación en dos pasos, necesitamos verificar que eres tú.",
+          confirmLabel: "Activar 2FA",
         }
       : {
-          title: 'Confirma tu contraseña',
+          title: "Confirma tu contraseña",
           description:
-            'Antes de desactivar la autenticación en dos pasos, necesitamos verificar que eres tú.',
-          confirmLabel: 'Desactivar 2FA',
+            "Antes de desactivar la autenticación en dos pasos, necesitamos verificar que eres tú.",
+          confirmLabel: "Desactivar 2FA",
         };
 
   return (
@@ -100,9 +104,9 @@ export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps)
           </h2>
           <ul className="mt-4 space-y-3">
             {[
-              'Protege tu cuenta aunque alguien conozca tu contraseña.',
-              'Añade un segundo factor con una app como Google Authenticator o Authy.',
-              'Reduce el riesgo de accesos no autorizados a tu panel.',
+              "Protege tu cuenta aunque alguien conozca tu contraseña.",
+              "Añade un segundo factor con una app como Google Authenticator o Authy.",
+              "Reduce el riesgo de accesos no autorizados a tu panel.",
             ].map((benefit) => (
               <li
                 key={benefit}
@@ -120,7 +124,7 @@ export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps)
           </ul>
           <button
             type="button"
-            onClick={() => handleOpenPasswordModal('enable')}
+            onClick={() => handleOpenPasswordModal("enable")}
             className="mt-6 h-11 rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
             Activar autenticación en dos pasos
@@ -133,7 +137,7 @@ export function TwoFactorSettings({ isEnabled = false }: TwoFactorSettingsProps)
           </p>
           <button
             type="button"
-            onClick={() => handleOpenPasswordModal('disable')}
+            onClick={() => handleOpenPasswordModal("disable")}
             className="mt-4 h-11 rounded-lg border border-zinc-300 px-5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
           >
             Desactivar autenticación en dos pasos
@@ -170,19 +174,19 @@ function StatusCard({ isEnabled }: { isEnabled: boolean }) {
             </h2>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
               {isEnabled
-                ? 'Tu cuenta requiere un código de verificación al iniciar sesión.'
-                : 'La autenticación en dos pasos no está configurada en tu cuenta.'}
+                ? "Tu cuenta requiere un código de verificación al iniciar sesión."
+                : "La autenticación en dos pasos no está configurada en tu cuenta."}
             </p>
           </div>
         </div>
         <span
           className={
             isEnabled
-              ? 'rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
-              : 'rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+              ? "rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300"
+              : "rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
           }
         >
-          {isEnabled ? 'Activo' : 'Desactivado'}
+          {isEnabled ? "Activo" : "Desactivado"}
         </span>
       </div>
     </section>

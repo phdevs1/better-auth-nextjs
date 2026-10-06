@@ -16,7 +16,10 @@ type OtpInputProps = {
   onChange: (value: string) => void;
 };
 
-function focusInput(inputRefs: RefObject<(HTMLInputElement | null)[]>, index: number) {
+function focusInput(
+  inputRefs: RefObject<(HTMLInputElement | null)[]>,
+  index: number,
+) {
   inputRefs.current[index]?.focus();
   inputRefs.current[index]?.select();
 }
@@ -44,7 +47,10 @@ export function OtpInput({ id, name, value, onChange }: OtpInputProps) {
     }
   }
 
-  function handleKeyDown(index: number, event: KeyboardEvent<HTMLInputElement>) {
+  function handleKeyDown(
+    index: number,
+    event: KeyboardEvent<HTMLInputElement>,
+  ) {
     if (event.key === "Backspace") {
       event.preventDefault();
 
@@ -99,7 +105,11 @@ export function OtpInput({ id, name, value, onChange }: OtpInputProps) {
   return (
     <>
       <input type="hidden" id={id} name={name} value={value} readOnly />
-      <div className="flex justify-center gap-2 sm:gap-3" role="group" aria-label="Código de verificación">
+      <div
+        className="flex justify-center gap-2 sm:gap-3"
+        role="group"
+        aria-label="Código de verificación"
+      >
         {digits.map((digit, index) => (
           <input
             key={index}

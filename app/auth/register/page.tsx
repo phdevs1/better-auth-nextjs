@@ -12,7 +12,8 @@ export default function RegisterPage() {
       description="Completa tus datos para registrarte."
       footer={
         <>
-          ¿Ya tienes cuenta? <AuthLink href="/auth/login" label="Inicia sesión" />
+          ¿Ya tienes cuenta?{" "}
+          <AuthLink href="/auth/login" label="Inicia sesión" />
         </>
       }
     >

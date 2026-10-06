@@ -12,7 +12,8 @@ export default function TwoFactorPage() {
       description="Introduce el código de 6 caracteres generado por tu app de autenticación."
       footer={
         <>
-          ¿Problemas para acceder? <AuthLink href="/auth/login" label="Volver al login" />
+          ¿Problemas para acceder?{" "}
+          <AuthLink href="/auth/login" label="Volver al login" />
         </>
       }
     >

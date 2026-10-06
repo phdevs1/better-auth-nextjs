@@ -12,7 +12,8 @@ export default function LoginPage() {
       description="Introduce tu email y contraseña para acceder."
       footer={
         <>
-          ¿No tienes cuenta? <AuthLink href="/auth/register" label="Regístrate" />
+          ¿No tienes cuenta?{" "}
+          <AuthLink href="/auth/register" label="Regístrate" />
         </>
       }
     >

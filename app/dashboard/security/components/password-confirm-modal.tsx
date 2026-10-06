@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useId, useRef, type FormEvent } from 'react';
+import { useEffect, useId, useRef, type FormEvent } from "react";
 
 type PasswordConfirmModalProps = {
   isOpen: boolean;
@@ -15,9 +15,9 @@ export function PasswordConfirmModal({
   isOpen,
   onClose,
   onConfirm,
-  title = 'Confirma tu contraseña',
-  description = 'Por seguridad, introduce tu contraseña actual antes de continuar.',
-  confirmLabel = 'Continuar',
+  title = "Confirma tu contraseña",
+  description = "Por seguridad, introduce tu contraseña actual antes de continuar.",
+  confirmLabel = "Continuar",
 }: PasswordConfirmModalProps) {
   const titleId = useId();
   const descriptionId = useId();
@@ -31,17 +31,17 @@ export function PasswordConfirmModal({
     passwordInputRef.current?.focus();
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose();
       }
     }
 
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
 
@@ -53,9 +53,9 @@ export function PasswordConfirmModal({
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const password = formData.get('password');
+    const password = formData.get("password");
 
-    if (typeof password !== 'string' || !password) {
+    if (typeof password !== "string" || !password) {
       return;
     }
 
@@ -154,7 +154,11 @@ function CloseIcon() {
       className="h-5 w-5"
       aria-hidden
     >
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6 18 18 6M6 6l12 12"
+      />
     </svg>
   );
 }

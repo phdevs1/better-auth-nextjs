@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 const placeholderUser = {
-  name: 'Jane Doe',
-  email: 'jane.doe@example.com',
+  name: "Jane Doe",
+  email: "jane.doe@example.com",
 };
 
 export const UserEmailInformation = () => {

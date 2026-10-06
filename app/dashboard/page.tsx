@@ -1,30 +1,30 @@
-import { StatCard } from './components/stat-card';
-import { UserEmailInformation } from './components/user-email-information';
+import { StatCard } from "./components/stat-card";
+import { UserEmailInformation } from "./components/user-email-information";
 
 const recentActivity = [
   {
-    id: '1',
-    action: 'Nuevo registro',
-    detail: 'usuario@ejemplo.com',
-    time: 'Hace 5 min',
+    id: "1",
+    action: "Nuevo registro",
+    detail: "usuario@ejemplo.com",
+    time: "Hace 5 min",
   },
   {
-    id: '2',
-    action: 'Inicio de sesión',
-    detail: 'admin@ejemplo.com',
-    time: 'Hace 12 min',
+    id: "2",
+    action: "Inicio de sesión",
+    detail: "admin@ejemplo.com",
+    time: "Hace 12 min",
   },
   {
-    id: '3',
-    action: 'Sesión cerrada',
-    detail: 'invitado@ejemplo.com',
-    time: 'Hace 1 h',
+    id: "3",
+    action: "Sesión cerrada",
+    detail: "invitado@ejemplo.com",
+    time: "Hace 1 h",
   },
   {
-    id: '4',
-    action: 'Contraseña actualizada',
-    detail: 'demo@ejemplo.com',
-    time: 'Hace 3 h',
+    id: "4",
+    action: "Contraseña actualizada",
+    detail: "demo@ejemplo.com",
+    time: "Hace 3 h",
   },
 ];
 

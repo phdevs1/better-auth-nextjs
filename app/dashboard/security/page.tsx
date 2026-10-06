@@ -1,8 +1,8 @@
-import { UserEmailInformation } from '../components/user-email-information';
-import { TwoFactorSettings } from './components/two-factor-settings';
+import { UserEmailInformation } from "../components/user-email-information";
+import { TwoFactorSettings } from "./components/two-factor-settings";
 
 export const metadata = {
-  title: 'Seguridad — Dashboard',
+  title: "Seguridad — Dashboard",
 };
 
 export default function SecurityPage() {

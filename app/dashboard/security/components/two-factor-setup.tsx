@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import QRCode from 'react-qr-code';
-import { OtpInput } from '@/app/auth/components/otp-input';
+import { useState } from "react";
+import QRCode from "react-qr-code";
+import { OtpInput } from "@/app/auth/components/otp-input";
 
 type TwoFactorSetupProps = {
   totpUri: string;
@@ -20,21 +20,23 @@ export function TwoFactorSetup({
   onCancel,
 }: TwoFactorSetupProps) {
   const [codesAcknowledged, setCodesAcknowledged] = useState(false);
-  const [verificationCode, setVerificationCode] = useState('');
-  const [copyFeedback, setCopyFeedback] = useState<'secret' | 'codes' | null>(null);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [copyFeedback, setCopyFeedback] = useState<"secret" | "codes" | null>(
+    null,
+  );
 
   const isVerificationComplete = verificationCode.length === 6;
   const canComplete = codesAcknowledged && isVerificationComplete;
 
   async function handleCopySecret() {
     await navigator.clipboard.writeText(secretKey);
-    setCopyFeedback('secret');
+    setCopyFeedback("secret");
     setTimeout(() => setCopyFeedback(null), 2000);
   }
 
   async function handleCopyCodes() {
-    await navigator.clipboard.writeText(backupCodes.join('\n'));
-    setCopyFeedback('codes');
+    await navigator.clipboard.writeText(backupCodes.join("\n"));
+    setCopyFeedback("codes");
     setTimeout(() => setCopyFeedback(null), 2000);
   }
 
@@ -82,7 +84,7 @@ export function TwoFactorSetup({
                   onClick={handleCopySecret}
                   className="shrink-0 rounded-lg border border-zinc-300 px-3 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
                 >
-                  {copyFeedback === 'secret' ? 'Copiado' : 'Copiar'}
+                  {copyFeedback === "secret" ? "Copiado" : "Copiar"}
                 </button>
               </div>
             </div>
@@ -120,7 +122,9 @@ export function TwoFactorSetup({
             onClick={handleCopyCodes}
             className="mt-4 h-10 rounded-lg border border-zinc-300 px-4 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-900"
           >
-            {copyFeedback === 'codes' ? 'Códigos copiados' : 'Copiar todos los códigos'}
+            {copyFeedback === "codes"
+              ? "Códigos copiados"
+              : "Copiar todos los códigos"}
           </button>
 
           <label className="mt-5 flex cursor-pointer items-start gap-3">
